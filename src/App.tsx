@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { TransactionsDashboard } from './src/pages/TransactionsDashboard';
+import { TransactionsDashboard } from './components/TransactionsDashboard';
 import { TransactionDetail } from './components/TransactionDetail';
 import { AdminProfile } from './components/AdminProfile';
 import { DemoForm } from './components/DemoForm';
 import { WebsiteSettings } from './components/WebsiteSettings';
-import { NewsPage } from './src/pages/NewsPage';
 import { WebsiteConfigProvider } from './contexts/WebsiteConfigContext';
-import { HomePage } from './src/pages/HomePage';
-import { LoginModal } from './src/components/LoginModal';
+import { LandingPage } from './components/LandingPage';
+import { LoginModal } from './components/LoginModal';
 
 export type Transaction = {
   id: string;
@@ -28,7 +27,7 @@ export type Transaction = {
   lostDeals?: number;
 };
 
-export type View = 'dashboard' | 'detail' | 'profile' | 'demoform' | 'settings' | 'news';
+export type View = 'dashboard' | 'detail' | 'profile' | 'demoform' | 'settings';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -67,21 +66,11 @@ export default function App() {
     setCurrentView('settings');
   };
 
-  const handleViewNews = () => {
-    setCurrentView('news');
-  };
-
-  const handleNavigate = (view: string) => {
-    if (view === 'dashboard' || view === 'detail' || view === 'profile' || view === 'demoform' || view === 'settings' || view === 'news') {
-      setCurrentView(view as View);
-    }
-  };
-
   return (
     <WebsiteConfigProvider>
       {!isAuthenticated ? (
         <>
-          <HomePage onLoginClick={handleLoginClick} />
+          <LandingPage onLoginClick={handleLoginClick} />
           <LoginModal 
             open={showLoginModal} 
             onClose={() => setShowLoginModal(false)}
@@ -96,7 +85,6 @@ export default function App() {
               onViewProfile={handleViewProfile}
               onViewDemoForm={handleViewDemoForm}
               onViewSettings={handleViewSettings}
-              onViewNews={handleViewNews}
             />
           )}
           {currentView === 'detail' && selectedTransaction && (
@@ -113,12 +101,6 @@ export default function App() {
           )}
           {currentView === 'settings' && (
             <WebsiteSettings onBack={handleBackToDashboard} />
-          )}
-          {currentView === 'news' && (
-            <NewsPage 
-              onNavigate={handleNavigate}
-              onViewProfile={handleViewProfile}
-            />
           )}
         </div>
       )}
