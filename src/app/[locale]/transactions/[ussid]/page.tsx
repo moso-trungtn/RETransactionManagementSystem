@@ -12,9 +12,11 @@ export default function TransactionDetailPage() {
   // Find the transaction by ID
   const transaction = mockTransactions.find(t => t.id === ussid);
 
+  const locale = params.locale as string;
+
   // If transaction not found, redirect to transactions page
   if (!transaction) {
-    router.push('/transactions');
+    router.push(`/${locale}/transactions`);
     return null;
   }
 

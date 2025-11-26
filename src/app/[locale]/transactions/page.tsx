@@ -1,14 +1,16 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { TransactionsDashboard } from '@/features/transactions/components/TransactionsDashboard';
 import type { Transaction } from '@/types/transaction';
 
 export default function TransactionsPage() {
   const router = useRouter();
+  const params = useParams();
+  const locale = params.locale as string;
 
   const handleViewTransaction = (transaction: Transaction) => {
-    router.push(`/transactions/${transaction.id}`);
+    router.push(`/${locale}/transactions/${transaction.id}`);
   };
 
   const handleViewProfile = () => {

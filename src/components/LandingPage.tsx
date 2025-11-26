@@ -1,5 +1,5 @@
 import { Button } from "@/components/button";
-import { CheckCircle2, Clock, FileText, Users, TrendingUp, Shield, Zap } from 'lucide-react';
+import {CheckCircle2, Clock, FileText, Users, TrendingUp, Shield, Zap, Mail, Phone} from 'lucide-react';
 import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
 import { Navbar } from "@/shared/components/Navbar";
 import { Footer } from "@/shared/components/Footer";
@@ -175,24 +175,53 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-white mb-6" style={{ fontSize: '40px', fontWeight: '700' }}>
-            Ready to Transform Your Real Estate Business?
-          </h2>
-          <p className="text-orange-100 mb-8 max-w-2xl mx-auto" style={{ fontSize: '18px' }}>
-            Join thousands of real estate professionals who trust LoanFactory Transaction  to manage their transactions efficiently and close more deals.
-          </p>
-          <Button 
-            onClick={onLoginClick}
-            className="bg-orange-600 text-white hover:bg-orange-700"
-            style={{ fontSize: '18px', padding: '24px 32px', height: 'auto' }}
-          >
-            Start Your Free Trial
-          </Button>
-        </div>
-      </section>
+        {/* CTA Section */}
+        <section className="relative py-24 mx-8 lg:mx-20 my-20">
+            <div className="max-w-7xl mx-auto">
+                <div className="relative rounded-[32px] overflow-hidden h-[436px]">
+                    {/* Background Image with Gradient Overlay */}
+                    <div className="absolute inset-0">
+                        <ImageWithFallback
+                            src="https://images.unsplash.com/photo-1762341116897-921e2a52f7ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHdvbWFuJTIwb2ZmaWNlfGVufDF8fHx8MTc2NDA5MTI4Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                            alt="Professional Business"
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,0,0,0.82)] via-[rgba(0,0,0,0.61)] to-[rgba(0,0,0,0.05)]" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative h-full flex items-center px-14">
+                        <div className="max-w-xl space-y-12">
+                            <div className="space-y-4">
+                                <h2 className="text-white text-[26px]">
+                                    Ready to Experience the Difference?
+                                </h2>
+                                <p className="text-white text-lg opacity-90">
+                                    Our team is ready to guide you with the expertise and integrity that MOSO is known for.
+                                </p>
+                            </div>
+
+                            <div className="flex flex-wrap gap-4">
+                                <Button
+                                    variant="outline"
+                                    className="border-white text-white hover:bg-white hover:text-[#F36F23] px-5 py-6 rounded-full h-auto"
+                                >
+                                    <Phone className="size-5 mr-2" />
+                                    1-800-686-6868
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                    className="border-white text-white hover:bg-white hover:text-[#F36F23] px-5 py-6 rounded-full h-auto"
+                                >
+                                    <Mail className="size-5 mr-2" />
+                                    realestate@moso.com
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
       {/* Footer */}
       <Footer />

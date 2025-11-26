@@ -6,12 +6,21 @@ export interface AccordionSection {
   content: React.ReactNode;
 }
 
-interface FormAccordionProps {
+type FormAccordionSingleProps = {
   sections: AccordionSection[];
-  type?: 'single' | 'multiple';
-  defaultValue?: string | string[];
+  type?: 'single';
+  defaultValue?: string;
   className?: string;
-}
+};
+
+type FormAccordionMultipleProps = {
+  sections: AccordionSection[];
+  type: 'multiple';
+  defaultValue?: string[];
+  className?: string;
+};
+
+type FormAccordionProps = FormAccordionSingleProps | FormAccordionMultipleProps;
 
 export function FormAccordion({
   sections,
@@ -21,8 +30,8 @@ export function FormAccordion({
 }: FormAccordionProps) {
   return (
     <Accordion
-      type={type as any}
-      defaultValue={defaultValue}
+      type={type}
+      defaultValue={defaultValue as any}
       className={className}
     >
       {sections.map((section) => (

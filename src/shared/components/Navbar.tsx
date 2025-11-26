@@ -17,22 +17,51 @@ export function Navbar({onLoginClick, onViewTransactions}: NavbarProps) {
     ];
 
     return (
-        <nav className="border-b border-gray-200 bg-white sticky top-0 z-50">
-            <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
-                    <div className="flex items-center gap-2">
+        <nav className="bg-white sticky top-0 z-50" style={{ height: '71px', borderBottom: '1px solid #DEE2E6' }}>
+            <div className="max-w-9xl mx-auto px-8 h-full">
+                <div className="flex justify-between items-center h-full">
+                    {/* Logo */}
+                    <div className="flex items-center">
                         <img
-                            src="https://lf-homepage-444859640964.us-central1.run.app/images/logo/loanfactory.svg"
-                            alt="LoanFactory Logo"
-                            className="h-10 w-auto"
+                            src="/main-logo.svg"
+                            alt="Moso Logo"
+                            className="h-8 w-auto"
                         />
                     </div>
-                    <div className="flex items-center gap-3">
+
+                    {/* Center Navigation Links */}
+                    <div className="flex items-center gap-12">
+                        <a
+                            href="#about"
+                            className="text-sm font-normal hover:text-orange-500 transition-colors"
+                            style={{ color: '#2E2E2E' }}
+                        >
+                            About Us
+                        </a>
+                        <a
+                            href="#services"
+                            className="text-sm font-normal hover:text-orange-500 transition-colors"
+                            style={{ color: '#2E2E2E' }}
+                        >
+                            Our Services
+                        </a>
+                        <a
+                            href="#contact"
+                            className="text-sm font-normal hover:text-orange-500 transition-colors"
+                            style={{ color: '#2E2E2E' }}
+                        >
+                            Contact Us
+                        </a>
+                    </div>
+
+                    {/* Sign in Button */}
+                    <div className="flex items-center gap-8">
                         <Button
                             onClick={onLoginClick}
-                            className="bg-orange-500 hover:bg-orange-600 text-white"
+                            className="text-white rounded-full px-8 py-2.5 text-sm font-semibold"
+                            style={{ backgroundColor: '#F36F23' }}
                         >
-                            Login
+                            Sign in
                         </Button>
 
                         <DropdownMenu>

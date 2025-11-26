@@ -1,11 +1,7 @@
 import { useState } from 'react';
-import { TransactionsDashboard } from './components/TransactionsDashboard';
-import { TransactionDetail } from './components/TransactionDetail';
 import { AdminProfile } from './components/AdminProfile';
-import { DemoForm } from './components/DemoForm';
 import { WebsiteSettings } from './components/WebsiteSettings';
 import { WebsiteConfigProvider } from './contexts/WebsiteConfigContext';
-import { LandingPage } from './components/LandingPage';
 import { LoginModal } from './components/LoginModal';
 
 export type Transaction = {
@@ -70,7 +66,6 @@ export default function App() {
     <WebsiteConfigProvider>
       {!isAuthenticated ? (
         <>
-          <LandingPage onLoginClick={handleLoginClick} />
           <LoginModal 
             open={showLoginModal} 
             onClose={() => setShowLoginModal(false)}

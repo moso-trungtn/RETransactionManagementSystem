@@ -32,10 +32,22 @@ export function LoginModal({
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [error, setError] = useState("");
+
+    // Demo account credentials
+    const DEMO_EMAIL = "demo@moso.com";
+    const DEMO_PASSWORD = "demo123";
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        //validate credentials here
-        onLogin();
+        setError("");
+
+        // Validate credentials
+        if (email === DEMO_EMAIL && password === DEMO_PASSWORD) {
+            onLogin();
+        } else {
+            setError("Invalid email or password. Try demo@moso.com / demo123");
+        }
     };
 
     return (
@@ -53,8 +65,8 @@ export function LoginModal({
                 <div className="bg-gradient-to-r white px-8 pt-6 pb-4">
                     <div className="flex items-center justify-center gap-3 mb-3"></div>
                     <img
-                        src="https://lf-homepage-444859640964.us-central1.run.app/images/logo/loanfactory.svg"
-                        alt="LoanFactory"
+                        src="/main-logo.svg"
+                        alt="Moso Logo"
                         className="h-12 w-auto mx-auto mb-1"
                     />
                     <p
@@ -67,6 +79,12 @@ export function LoginModal({
 
                 {/* Login Form */}
                 <div className="px-8 py-6 bg-white">
+                    {error && (
+                        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
+                            <p className="text-red-600 text-sm">{error}</p>
+                        </div>
+                    )}
+
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-1.5">
                             <Label
