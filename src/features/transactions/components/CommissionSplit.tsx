@@ -14,9 +14,14 @@ interface CommissionParty {
   amount: number;
 }
 
+interface CommissionSplitData {
+  commission: number;
+  parties: CommissionParty[];
+}
+
 interface CommissionSplitProps {
   totalCommission: number;
-  onSave?: (data: any) => void;
+  onSave?: (data: CommissionSplitData) => void;
 }
 
 export function CommissionSplit({ totalCommission, onSave }: CommissionSplitProps) {
@@ -87,21 +92,22 @@ export function CommissionSplit({ totalCommission, onSave }: CommissionSplitProp
     });
   };
 
-  const updateParty = (id: string, field: keyof CommissionParty, value: any) => {
+  const updateParty = (id: string, field: keyof CommissionParty, value: string | number) => {
     setParties(prevParties => {
       const updatedParties = prevParties.map(p => {
         if (p.id === id) {
           const updated = { ...p, [field]: value };
-          
+          const numValue = typeof value === 'string' ? parseFloat(value) || 0 : value;
+
           // Update amount when percentage changes
           if (field === 'percentage') {
-            updated.amount = (commission * value) / 100;
+            updated.amount = (commission * numValue) / 100;
           }
           // Update percentage when amount changes
           else if (field === 'amount') {
-            updated.percentage = commission > 0 ? (value / commission) * 100 : 0;
+            updated.percentage = commission > 0 ? (numValue / commission) * 100 : 0;
           }
-          
+
           return updated;
         }
         return p;
@@ -158,12 +164,12 @@ export function CommissionSplit({ totalCommission, onSave }: CommissionSplitProp
     
     // Filter out blank rows when saving
     const splitData = {
-      totalCommission: commission,
+      commission: commission,
       parties: filledParties.map(p => ({
         ...p
       }))
     };
-    
+
     onSave && onSave(splitData);
     toast.success('Commission split saved successfully!');
   };

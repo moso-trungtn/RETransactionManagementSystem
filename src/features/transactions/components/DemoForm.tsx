@@ -129,19 +129,20 @@ export function DemoForm({ onBack }: DemoFormProps) {
     }
   };
 
-  const updateEditableTableRow = (id: string, field: string, value: any) => {
+  const updateEditableTableRow = (id: string, field: string, value: unknown) => {
     setEditableTableRows(prevRows => {
       const updatedRows = prevRows.map(row => {
         if (row.id === id) {
           const updated = { ...row, [field]: value };
-          
+          const numValue = typeof value === 'number' ? value : (typeof value === 'string' ? parseFloat(value) || 0 : 0);
+
           // Two-way binding for percentage and amount
           if (field === 'percentage') {
-            updated.amount = (50000 * value) / 100; // assuming $50,000 total
+            updated.amount = (50000 * numValue) / 100; // assuming $50,000 total
           } else if (field === 'amount') {
-            updated.percentage = 50000 > 0 ? (value / 50000) * 100 : 0;
+            updated.percentage = 50000 > 0 ? (numValue / 50000) * 100 : 0;
           }
-          
+
           return updated;
         }
         return row;

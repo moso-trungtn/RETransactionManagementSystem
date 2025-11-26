@@ -4,34 +4,37 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { WebsiteConfigProvider } from '@/providers/WebsiteConfigContext';
 
+// Derive proper Locale type from routing.locales
+type Locale = (typeof routing.locales)[number];
+
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+    return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+                                               children,
+                                               params,
+                                           }: {
+    children: React.ReactNode;
+    params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+    const { locale } = await params;
 
-  if (!routing.locales.includes(locale as any)) {
-    notFound();
-  }
+    if (!routing.locales.includes(locale as Locale)) {
+        notFound();
+    }
 
-  const messages = await getMessages();
+    const messages = await getMessages({ locale });
 
-  return (
-    <html lang={locale} suppressHydrationWarning>
-      <body>
+    return (
+        <html lang={locale} suppressHydrationWarning>
+        <body>
         <NextIntlClientProvider messages={messages}>
-          <WebsiteConfigProvider>
-            {children}
-          </WebsiteConfigProvider>
+            <WebsiteConfigProvider>
+                {children}
+            </WebsiteConfigProvider>
         </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+        </body>
+        </html>
+    );
 }

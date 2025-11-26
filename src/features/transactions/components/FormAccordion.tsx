@@ -28,20 +28,34 @@ export function FormAccordion({
   defaultValue,
   className = ''
 }: FormAccordionProps) {
+  const accordionContent = sections.map((section) => (
+    <AccordionItem key={section.id} value={section.id}>
+      <AccordionTrigger>{section.title}</AccordionTrigger>
+      <AccordionContent>
+        {section.content}
+      </AccordionContent>
+    </AccordionItem>
+  ));
+
+  if (type === 'multiple') {
+    return (
+      <Accordion
+        type="multiple"
+        defaultValue={defaultValue as string[]}
+        className={className}
+      >
+        {accordionContent}
+      </Accordion>
+    );
+  }
+
   return (
     <Accordion
-      type={type}
-      defaultValue={defaultValue as any}
+      type="single"
+      defaultValue={defaultValue as string}
       className={className}
     >
-      {sections.map((section) => (
-        <AccordionItem key={section.id} value={section.id}>
-          <AccordionTrigger>{section.title}</AccordionTrigger>
-          <AccordionContent>
-            {section.content}
-          </AccordionContent>
-        </AccordionItem>
-      ))}
+      {accordionContent}
     </Accordion>
   );
 }

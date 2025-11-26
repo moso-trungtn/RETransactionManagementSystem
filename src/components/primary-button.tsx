@@ -2,9 +2,7 @@ import * as React from 'react';
 import { Button, ButtonProps } from './button';
 import { useThemeColors } from "@/hooks/useThemeColors";
 
-export interface PrimaryButtonProps extends ButtonProps {}
-
-const PrimaryButton = React.forwardRef<HTMLButtonElement, PrimaryButtonProps>(
+const PrimaryButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, style, onMouseEnter, onMouseLeave, ...props }, ref) => {
     const { primaryColor, getPrimaryHoverStyle } = useThemeColors();
     const [isHovered, setIsHovered] = React.useState(false);

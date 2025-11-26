@@ -38,7 +38,7 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             <Navbar onLoginClick={onLoginClick} />
 
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-b from-gray-50 to-white py-20 lg:py-32">
+            <section className="relative bg-gradient-to-b from-gray-50 to-white py-20 lg:py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div>
@@ -56,28 +56,18 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
                             <div className="flex flex-wrap gap-4">
                                 <Button
                                     onClick={onLoginClick}
-                                    className="bg-orange-500 hover:bg-orange-600 text-white"
+                                    className="bg-orange-500 hover:bg-orange-600 text-white !rounded-full"
                                     style={{ fontSize: '18px', padding: '24px 32px', height: 'auto' }}
                                 >
                                     Join Us Now
                                 </Button>
                                 <Button
                                     variant="outline"
-                                    className="border-gray-300 text-gray-700"
+                                    className="border-gray-300 text-gray-700 !rounded-full"
                                     style={{ fontSize: '18px', padding: '24px 32px', height: 'auto' }}
                                 >
                                     Contact Our Team
                                 </Button>
-                            </div>
-                            <div className="mt-8 flex items-center gap-6">
-                                <div className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-5 h-5 text-orange-500" />
-                                    <span className="text-gray-600">No credit card required</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-5 h-5 text-orange-500" />
-                                    <span className="text-gray-600">Setup in minutes</span>
-                                </div>
                             </div>
                         </div>
                         <div className="relative">
@@ -105,7 +95,7 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             </section>
 
             {/* Features Section */}
-            <section className="py-20 bg-white">
+            <section className="py-2 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-gray-900 mb-4" style={{ fontSize: '40px', fontWeight: '700' }}>
@@ -202,7 +192,7 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             <section className="py-20 bg-[#F36F23]">
                 <div className="max-w-7xl mx-auto px-8 lg:px-20">
                     <div className="text-center mb-16">
-                        <h2 className="text-white mb-4">
+                        <h2 className="text-white mb-4" style={{ fontSize: '50px', fontWeight: '600' }}>
                             What our customers say
                         </h2>
                     </div>
@@ -243,7 +233,7 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
             </section>
 
             {/* CTA Section */}
-            <section className="relative py-24 mx-8 lg:mx-20 my-20">
+            <section className="relative py-24 mx-8 lg:mx-20 ">
                 <div className="max-w-7xl mx-auto">
                     <div className="relative rounded-[32px] overflow-hidden h-[436px]">
                         {/* Background Image with Gradient Overlay */}
@@ -271,14 +261,14 @@ export function LandingPage({ onLoginClick }: LandingPageProps) {
                                 <div className="flex flex-wrap gap-4">
                                     <Button
                                         variant="outline"
-                                        className="border-white text-white hover:bg-white hover:text-[#F36F23] px-5 py-6 rounded-full h-auto"
+                                        className="bg-transparent border-white text-white hover:bg-white hover:text-[#F36F23] px-5 py-6 !rounded-full h-auto"
                                     >
                                         <Phone className="size-5 mr-2" />
                                         1-800-686-6868
                                     </Button>
                                     <Button
                                         variant="outline"
-                                        className="border-white text-white hover:bg-white hover:text-[#F36F23] px-5 py-6 rounded-full h-auto"
+                                        className="bg-transparent border-white text-white hover:bg-white hover:text-[#F36F23] px-5 py-6 !rounded-full h-auto"
                                     >
                                         <Mail className="size-5 mr-2" />
                                         realestate@moso.com

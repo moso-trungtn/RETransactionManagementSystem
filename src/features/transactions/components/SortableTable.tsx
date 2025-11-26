@@ -3,28 +3,28 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/button";
 import { ArrowUpDown } from 'lucide-react';
 
-export interface SortableTableColumn {
+export interface SortableTableColumn<T = Record<string, unknown>> {
   key: string;
   label: string;
   sortable?: boolean;
-  render?: (value: any, row: any) => React.ReactNode;
+  render?: (value: unknown, row: T) => React.ReactNode;
 }
 
-interface SortableTableProps {
-  columns: SortableTableColumn[];
-  data: any[];
+interface SortableTableProps<T = Record<string, unknown>> {
+  columns: SortableTableColumn<T>[];
+  data: T[];
   defaultSortColumn?: string;
   defaultSortDirection?: 'asc' | 'desc';
   className?: string;
 }
 
-export function SortableTable({
+export function SortableTable<T extends Record<string, unknown> = Record<string, unknown>>({
   columns,
   data,
   defaultSortColumn,
   defaultSortDirection = 'asc',
   className = ''
-}: SortableTableProps) {
+}: SortableTableProps<T>) {
   const [sortColumn, setSortColumn] = useState<string | null>(defaultSortColumn || null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>(defaultSortDirection);
 
@@ -45,7 +45,11 @@ export function SortableTable({
 
     if (aValue === bValue) return 0;
 
-    const comparison = aValue > bValue ? 1 : -1;
+    // Convert to comparable values
+    const aComp = aValue === null || aValue === undefined ? '' : String(aValue);
+    const bComp = bValue === null || bValue === undefined ? '' : String(bValue);
+
+    const comparison = aComp > bComp ? 1 : -1;
     return sortDirection === 'asc' ? comparison : -comparison;
   });
 
@@ -81,7 +85,7 @@ export function SortableTable({
                   <TableCell key={column.key}>
                     {column.render
                       ? column.render(row[column.key], row)
-                      : row[column.key]}
+                      : (row[column.key] as React.ReactNode)}
                   </TableCell>
                 ))}
               </TableRow>

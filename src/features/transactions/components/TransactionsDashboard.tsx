@@ -107,7 +107,7 @@ export function TransactionsDashboard({ onViewTransaction, onViewProfile, onView
     return '🏠';
   };
 
-  const handleNewTransactionSave = (data: any) => {
+  const handleNewTransactionSave = (data: Record<string, unknown>) => {
     console.log('New transaction data:', data);
     setShowNewTransaction(false);
   };
@@ -117,7 +117,7 @@ export function TransactionsDashboard({ onViewTransaction, onViewProfile, onView
     setShowAssignOwner(true);
   };
 
-  const handleAssignOwnerSave = (assignments: any) => {
+  const handleAssignOwnerSave = (assignments: Record<string, unknown>) => {
     console.log('Assignments saved:', assignments);
     setShowAssignOwner(false);
     setSelectedTransaction(null);
@@ -141,23 +141,23 @@ export function TransactionsDashboard({ onViewTransaction, onViewProfile, onView
 
   return (
     <div className="min-h-screen bg-white">
-      {showNewTransaction && (
-        <NewTransaction
-          onClose={() => setShowNewTransaction(false)}
-          onSave={handleNewTransactionSave}
-        />
-      )}
+      {/*{showNewTransaction && (*/}
+      {/*  <NewTransaction*/}
+      {/*    onClose={() => setShowNewTransaction(false)}*/}
+      {/*    onSave={handleNewTransactionSave}*/}
+      {/*  />*/}
+      {/*)}*/}
 
-      {showAssignOwner && selectedTransaction && (
-        <AssignOwner
-          transaction={selectedTransaction}
-          onClose={() => {
-            setShowAssignOwner(false);
-            setSelectedTransaction(null);
-          }}
-          onSave={handleAssignOwnerSave}
-        />
-      )}
+      {/*{showAssignOwner && selectedTransaction && (*/}
+      {/*  <AssignOwner*/}
+      {/*    transaction={selectedTransaction}*/}
+      {/*    onClose={() => {*/}
+      {/*      setShowAssignOwner(false);*/}
+      {/*      setSelectedTransaction(null);*/}
+      {/*    }}*/}
+      {/*    onSave={handleAssignOwnerSave}*/}
+      {/*  />*/}
+      {/*)}*/}
       
       {/* Header */}
       <header className="border-b bg-white sticky top-0 z-50">

@@ -11,11 +11,41 @@ import { X, Upload, Home, Check, Plus, MoreHorizontal, Trash2, Info } from 'luci
 import { toast } from 'sonner';
 import { Toaster } from "@/components/sonner";
 
+interface TransactionFormData {
+  transactionType: string;
+  fullName: string;
+  middleName: string;
+  email: string;
+  phone: string;
+  relationship: string;
+  streetAddress: string;
+  unit: string;
+  zipCode: string;
+  city: string;
+  state: string;
+  county: string;
+  propertyValue: string;
+  contractDate: string;
+  closingDate: string;
+  approvedContingency: string;
+  loanContingency: string;
+  salePrice: string;
+  lastAgreed: string;
+  purchasePrice: string;
+  approvedDate: string;
+  appraisalOrdered: boolean;
+  escrowNumber: string;
+  lenderName: string;
+  mlsCoordinator: string;
+  agentTeam: string;
+  listingAgent: string;
+}
+
 interface NewTransactionProps {
   onClose: () => void;
-  onSave: (data: any) => void;
+  onSave: (data: TransactionFormData & { parties: Party[]; conditions: Condition[] }) => void;
   editMode?: boolean;
-  existingData?: any;
+  existingData?: Partial<Record<string, string | number>>;
 }
 
 type Section = 
@@ -69,37 +99,37 @@ export function NewTransaction({ onClose, onSave, editMode = false, existingData
   
   const [formData, setFormData] = useState({
     // Type
-    transactionType: existingData?.type || '',
-    
+    transactionType: (existingData?.['type'] as string) || '',
+
     // Client Information
-    fullName: existingData?.clientName || '',
+    fullName: (existingData?.['clientName'] as string) || '',
     middleName: '',
     email: '',
     phone: '',
     relationship: '',
-    
+
     // Property Information
-    streetAddress: existingData?.address || '',
+    streetAddress: (existingData?.['address'] as string) || '',
     unit: '',
-    zipCode: existingData?.zipCode || '',
-    city: existingData?.city || '',
-    state: existingData?.state || '',
+    zipCode: (existingData?.zipCode as string) || '',
+    city: (existingData?.city as string) || '',
+    state: (existingData?.state as string) || '',
     county: '',
-    propertyValue: existingData?.price?.toString() || '',
-    
+    propertyValue: ((existingData?.['price'] as number) || 0).toString() || '',
+
     // Important Dates
-    contractDate: existingData?.contractDate || '',
-    closingDate: existingData?.closingDate || '',
+    contractDate: (existingData?.contractDate as string) || '',
+    closingDate: (existingData?.closingDate as string) || '',
     approvedContingency: '',
     loanContingency: '',
-    
+
     // Transactions
-    salePrice: existingData?.price?.toString() || '',
+    salePrice: ((existingData?.['price'] as number) || 0).toString() || '',
     lastAgreed: '',
-    purchasePrice: existingData?.price?.toString() || '',
+    purchasePrice: ((existingData?.['price'] as number) || 0).toString() || '',
     approvedDate: '',
     appraisalOrdered: false,
-    escrowNumber: existingData?.mlsNumber || '',
+    escrowNumber: (existingData?.['mlsNumber'] as string) || '',
     lenderName: '',
     mlsCoordinator: '',
     agentTeam: '',
@@ -144,7 +174,7 @@ export function NewTransaction({ onClose, onSave, editMode = false, existingData
     partyRole: ''
   });
 
-  const handleInputChange = (field: string, value: any) => {
+  const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -235,7 +265,7 @@ export function NewTransaction({ onClose, onSave, editMode = false, existingData
     setShowAddConditionModal(false);
   };
 
-  const handleConditionFormChange = (field: string, value: any) => {
+  const handleConditionFormChange = (field: string, value: string) => {
     setConditionFormData(prev => ({
       ...prev,
       [field]: value
@@ -766,7 +796,7 @@ export function NewTransaction({ onClose, onSave, editMode = false, existingData
 
                 {parties.length === 0 ? (
                   <p className="text-gray-400 text-center py-8">
-                    No parties added yet. Click "Add Party" to get started.
+                    No parties added yet. Click &quot;Add Party&quot; to get started.
                   </p>
                 ) : (
                   <div className="space-y-3">
@@ -979,8 +1009,8 @@ export function NewTransaction({ onClose, onSave, editMode = false, existingData
                       <SelectContent>
                         <SelectItem value="buyer">Buyer</SelectItem>
                         <SelectItem value="seller">Seller</SelectItem>
-                        <SelectItem value="buyer-agent">Buyer's Agent</SelectItem>
-                        <SelectItem value="seller-agent">Seller's Agent</SelectItem>
+                        <SelectItem value="buyer-agent">Buyer&apos;s Agent</SelectItem>
+                        <SelectItem value="seller-agent">Seller&apos;s Agent</SelectItem>
                         <SelectItem value="escrow">Escrow Officer</SelectItem>
                         <SelectItem value="lender">Lender</SelectItem>
                         <SelectItem value="title">Title Officer</SelectItem>

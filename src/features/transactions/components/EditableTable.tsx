@@ -2,7 +2,7 @@ import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { Trash2 } from 'lucide-react';
 
-export interface EditableTableColumn {
+export interface EditableTableColumn<T extends { id: string; [key: string]: unknown } = { id: string; [key: string]: unknown }> {
   key: string;
   label: string;
   width?: string; // e.g., '1fr', '120px', 'auto'
@@ -11,32 +11,32 @@ export interface EditableTableColumn {
   min?: number;
   max?: number;
   step?: number;
-  disabled?: (row: any) => boolean;
-  format?: (value: any, row: any) => string;
-  parse?: (value: string) => any;
+  disabled?: (row: T) => boolean;
+  format?: (value: unknown, row: T) => string;
+  parse?: (value: string) => unknown;
 }
 
-interface EditableTableProps {
-  columns: EditableTableColumn[];
-  rows: any[];
-  onUpdateRow: (id: string, field: string, value: any) => void;
+interface EditableTableProps<T extends { id: string; [key: string]: unknown } = { id: string; [key: string]: unknown }> {
+  columns: EditableTableColumn<T>[];
+  rows: T[];
+  onUpdateRow: (id: string, field: string, value: unknown) => void;
   onDeleteRow: (id: string) => void;
-  isBlankRow?: (row: any) => boolean;
+  isBlankRow?: (row: T) => boolean;
   formatCurrency?: (value: number) => string;
   parseCurrency?: (value: string) => number;
   showDeleteButton?: boolean;
 }
 
-export function EditableTable({
+export function EditableTable<T extends { id: string; [key: string]: unknown } = { id: string; [key: string]: unknown }>({
   columns,
   rows,
   onUpdateRow,
   onDeleteRow,
-  isBlankRow = (row) => !Object.values(row).some(v => v && v !== 0),
+  isBlankRow = (row) => !Object.values(row).some(v => (typeof v === 'number' ? v !== 0 : Boolean(v))),
   formatCurrency,
   parseCurrency,
   showDeleteButton = true
-}: EditableTableProps) {
+}: EditableTableProps<T>) {
   
   const defaultFormatCurrency = (value: number): string => {
     return new Intl.NumberFormat('en-US', {
@@ -88,7 +88,7 @@ export function EditableTable({
 
                 // Determine input type and value formatting
                 let inputType = 'text';
-                let displayValue = value;
+                let displayValue: string | number = '';
                 let handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   const newValue = e.target.value;
                   onUpdateRow(row.id, col.key, newValue);
@@ -96,19 +96,22 @@ export function EditableTable({
 
                 if (col.type === 'number') {
                   inputType = 'number';
-                  displayValue = value || '';
+                  displayValue = typeof value === 'number' ? value : '';
                   handleChange = (e) => {
                     onUpdateRow(row.id, col.key, Number(e.target.value));
                   };
                 } else if (col.type === 'currency') {
                   inputType = 'text';
-                  displayValue = isBlank ? '' : (col.format ? col.format(value, row) : currencyFormatter(value));
+                  const numValue = typeof value === 'number' ? value : 0;
+                  displayValue = isBlank ? '' : (col.format ? col.format(value, row) : currencyFormatter(numValue));
                   handleChange = (e) => {
                     const parsed = col.parse ? col.parse(e.target.value) : currencyParser(e.target.value);
                     onUpdateRow(row.id, col.key, parsed);
                   };
                 } else if (col.format) {
                   displayValue = col.format(value, row);
+                } else {
+                  displayValue = typeof value === 'string' || typeof value === 'number' ? value : '';
                 }
 
                 // Determine placeholder

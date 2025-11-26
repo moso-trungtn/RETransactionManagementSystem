@@ -9,7 +9,6 @@ import {Button} from "@/components/button";
 import {Input} from "@/components/input";
 import {Label} from "@/components/label";
 import {
-    FileText,
     Mail,
     Lock,
     Eye,
@@ -193,7 +192,7 @@ export function LoginModal({
                             className="text-gray-500"
                             style={{fontSize: "13px"}}
                         >
-                            Don't have an account?{" "}
+                            Don&apos;t have an account?{" "}
                             <a
                                 href="#"
                                 className="text-orange-500 hover:text-orange-600 transition-colors"

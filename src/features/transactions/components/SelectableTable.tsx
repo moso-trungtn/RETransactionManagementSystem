@@ -4,15 +4,15 @@ import { Badge } from "@/components/badge";
 import { Button } from "@/components/button";
 import { toast } from 'sonner';
 
-export interface SelectableTableColumn {
+export interface SelectableTableColumn<T = Record<string, unknown>> {
   key: string;
   label: string;
-  render?: (value: any, row: any) => React.ReactNode;
+  render?: (value: unknown, row: T) => React.ReactNode;
 }
 
-interface SelectableTableProps {
-  columns: SelectableTableColumn[];
-  data: any[];
+interface SelectableTableProps<T = Record<string, unknown>> {
+  columns: SelectableTableColumn<T>[];
+  data: T[];
   selectedRows: string[];
   onSelectionChange: (selectedIds: string[]) => void;
   rowIdKey?: string;
@@ -20,7 +20,7 @@ interface SelectableTableProps {
   className?: string;
 }
 
-export function SelectableTable({
+export function SelectableTable<T extends Record<string, unknown> = Record<string, unknown>>({
   columns,
   data,
   selectedRows,
@@ -28,7 +28,7 @@ export function SelectableTable({
   rowIdKey = 'id',
   showClearButton = true,
   className = ''
-}: SelectableTableProps) {
+}: SelectableTableProps<T>) {
   const toggleRow = (id: string) => {
     const newSelection = selectedRows.includes(id)
       ? selectedRows.filter(rowId => rowId !== id)
@@ -40,7 +40,7 @@ export function SelectableTable({
     if (selectedRows.length === data.length) {
       onSelectionChange([]);
     } else {
-      onSelectionChange(data.map(row => row[rowIdKey]));
+      onSelectionChange(data.map(row => String(row[rowIdKey])));
     }
   };
 
@@ -67,23 +67,26 @@ export function SelectableTable({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((row) => (
-              <TableRow key={row[rowIdKey]}>
-                <TableCell>
-                  <Checkbox
-                    checked={selectedRows.includes(row[rowIdKey])}
-                    onCheckedChange={() => toggleRow(row[rowIdKey])}
-                  />
-                </TableCell>
+            {data.map((row) => {
+              const rowId = String(row[rowIdKey]);
+              return (
+                <TableRow key={rowId}>
+                  <TableCell>
+                    <Checkbox
+                      checked={selectedRows.includes(rowId)}
+                      onCheckedChange={() => toggleRow(rowId)}
+                    />
+                  </TableCell>
                 {columns.map((column) => (
                   <TableCell key={column.key}>
                     {column.render
                       ? column.render(row[column.key], row)
-                      : row[column.key]}
+                      : (row[column.key] as React.ReactNode)}
                   </TableCell>
                 ))}
-              </TableRow>
-            ))}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>

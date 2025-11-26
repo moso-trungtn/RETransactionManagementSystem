@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Facebook, Twitter, Linkedin, Youtube, Instagram, Home, FileText } from 'lucide-react';
 
 export function Footer() {
@@ -38,14 +39,14 @@ export function Footer() {
                             <h3 className="mb-4">Useful Links</h3>
                             <ul className="space-y-2 text-sm text-gray-300">
                                 <li>
-                                    <a href="/about" className="hover:text-[#F36F25] transition-colors">
+                                    <Link href="/about" className="hover:text-[#F36F25] transition-colors">
                                         About Our Company
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="/contact" className="hover:text-[#F36F25] transition-colors">
+                                    <Link href="/contact" className="hover:text-[#F36F25] transition-colors">
                                         Contact
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
                                     <a href="#" className="hover:text-[#F36F25] transition-colors">

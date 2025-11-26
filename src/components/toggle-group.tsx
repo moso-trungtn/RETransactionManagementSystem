@@ -16,9 +16,8 @@ const ToggleGroupContext = React.createContext<ToggleVariants>({
   variant: "default",
 });
 
-interface ToggleGroupProps
-  extends React.ComponentProps<typeof ToggleGroupPrimitive.Root>,
-    ToggleVariants {}
+type ToggleGroupProps = React.ComponentProps<typeof ToggleGroupPrimitive.Root> &
+  ToggleVariants;
 
 function ToggleGroup({
   className,
@@ -45,9 +44,8 @@ function ToggleGroup({
   );
 }
 
-interface ToggleGroupItemProps
-  extends React.ComponentProps<typeof ToggleGroupPrimitive.Item>,
-    ToggleVariants {}
+type ToggleGroupItemProps = React.ComponentProps<typeof ToggleGroupPrimitive.Item> &
+  ToggleVariants;
 
 function ToggleGroupItem({
   className,

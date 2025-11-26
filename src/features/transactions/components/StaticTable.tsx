@@ -1,23 +1,23 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/table";
 import { Badge } from "@/components/badge";
 
-export interface TableColumn {
+export interface TableColumn<T = Record<string, unknown>> {
   key: string;
   label: string;
-  render?: (value: any, row: any) => React.ReactNode;
+  render?: (value: unknown, row: T) => React.ReactNode;
 }
 
-interface StaticTableProps {
-  columns: TableColumn[];
-  data: any[];
+interface StaticTableProps<T = Record<string, unknown>> {
+  columns: TableColumn<T>[];
+  data: T[];
   className?: string;
 }
 
-export function StaticTable({
+export function StaticTable<T extends Record<string, unknown> = Record<string, unknown>>({
   columns,
   data,
   className = ''
-}: StaticTableProps) {
+}: StaticTableProps<T>) {
   return (
     <div className={`border rounded-lg overflow-hidden ${className}`}>
       <Table>
@@ -35,7 +35,7 @@ export function StaticTable({
                 <TableCell key={column.key}>
                   {column.render
                     ? column.render(row[column.key], row)
-                    : row[column.key]}
+                    : (row[column.key] as React.ReactNode)}
                 </TableCell>
               ))}
             </TableRow>

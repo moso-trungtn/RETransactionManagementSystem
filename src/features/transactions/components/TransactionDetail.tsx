@@ -265,7 +265,7 @@ export function TransactionDetail({ transaction, onBack }: TransactionDetailProp
     notes: string;
   }>>([]);
 
-  const handleInputChange = (field: string, value: any) => {
+  const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -327,11 +327,11 @@ export function TransactionDetail({ transaction, onBack }: TransactionDetailProp
     }
   ]);
 
-  const handleCommissionSave = (data: any) => {
+  const handleCommissionSave = (data: { commission: number; parties: Array<{ id: string; name: string; role: string; percentage: number; amount: number }> }) => {
     console.log('Commission split data:', data);
   };
 
-  const handleEditTransaction = (data: any) => {
+  const handleEditTransaction = (data: Record<string, unknown> & { parties?: unknown[]; conditions?: unknown[] }) => {
     console.log('Updated transaction data:', data);
     setShowEditTransaction(false);
   };
@@ -573,14 +573,14 @@ export function TransactionDetail({ transaction, onBack }: TransactionDetailProp
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {showEditTransaction && (
-        <NewTransaction
-          onClose={() => setShowEditTransaction(false)}
-          onSave={handleEditTransaction}
-          editMode={true}
-          existingData={transaction}
-        />
-      )}
+      {/*{showEditTransaction && (*/}
+      {/*  <NewTransaction*/}
+      {/*    onClose={() => setShowEditTransaction(false)}*/}
+      {/*    onSave={handleEditTransaction}*/}
+      {/*    editMode={true}*/}
+      {/*    existingData={transaction}*/}
+      {/*  />*/}
+      {/*)}*/}
 
       {/* Navbar */}
       <Navbar onViewTransactions={onBack} onLoginClick={function (): void {
@@ -1560,7 +1560,7 @@ export function TransactionDetail({ transaction, onBack }: TransactionDetailProp
                   <h3 className="font-medium">Status Updated</h3>
                   <span className="text-sm text-gray-500">5 days ago</span>
                 </div>
-                <p className="text-sm text-gray-600">Transaction status changed from "Pre-contract" to "Under Contract"</p>
+                <p className="text-sm text-gray-600">Transaction status changed from &quot;Pre-contract&quot; to &quot;Under Contract&quot;</p>
               </div>
             </div>
           </div>

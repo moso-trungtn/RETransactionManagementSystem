@@ -4,10 +4,19 @@ import { Button } from "@/components/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/select";
 import { Transaction } from '@/types/transaction';
 
+interface OwnerAssignments {
+  listingAgent?: string;
+  buyerAgent?: string;
+  escrowOfficer?: string;
+  titleOfficer?: string;
+  lender?: string;
+  inspector?: string;
+}
+
 interface AssignOwnerProps {
   transaction: Transaction;
   onClose: () => void;
-  onSave: (assignments: any) => void;
+  onSave: (assignments: OwnerAssignments) => void;
 }
 
 interface TeamMember {

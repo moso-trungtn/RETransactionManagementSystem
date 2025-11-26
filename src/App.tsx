@@ -3,6 +3,9 @@ import { AdminProfile } from './components/AdminProfile';
 import { WebsiteSettings } from './components/WebsiteSettings';
 import { WebsiteConfigProvider } from './contexts/WebsiteConfigContext';
 import { LoginModal } from './components/LoginModal';
+import { TransactionsDashboard } from './features/transactions/components/TransactionsDashboard';
+import { TransactionDetail } from './features/transactions/components/TransactionDetail';
+import { DemoForm } from './features/transactions/components/DemoForm';
 
 export type Transaction = {
   id: string;
