@@ -10,8 +10,9 @@ import { Avatar, AvatarFallback } from "@/components/avatar";
 import { X, Upload, Home, Check, Plus, MoreHorizontal, Trash2, Info } from 'lucide-react';
 import { toast } from 'sonner';
 import { Toaster } from "@/components/sonner";
+import { Transaction } from '@/types/transaction';
 
-interface TransactionFormData {
+export interface TransactionFormData {
   transactionType: string;
   fullName: string;
   middleName: string;
@@ -45,7 +46,7 @@ interface NewTransactionProps {
   onClose: () => void;
   onSave: (data: TransactionFormData & { parties: Party[]; conditions: Condition[] }) => void;
   editMode?: boolean;
-  existingData?: Partial<Record<string, string | number>>;
+  existingData?: Partial<Transaction>;
 }
 
 type Section = 
@@ -56,7 +57,7 @@ type Section =
   | 'offer'
   | 'parties';
 
-interface Party {
+export interface Party {
   id: string;
   firstName: string;
   middleName: string;
@@ -71,7 +72,7 @@ interface Party {
   role: string;
 }
 
-interface Condition {
+export interface Condition {
   id: string;
   name: string;
   dueType: string;

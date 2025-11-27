@@ -9,7 +9,7 @@ import { ChevronLeft, Search, Mail, FolderPlus, FilePlus, MoreHorizontal, FileTe
 import { Transaction } from '@/types/transaction';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/tabs";
 import { CommissionSplit } from './CommissionSplit';
-import { NewTransaction } from './NewTransaction';
+import { NewTransaction, TransactionFormData, Party, Condition } from './NewTransaction';
 import { ToDoTabContent } from './ToDoTabContent';
 import { Label } from "@/components/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/select";
@@ -331,7 +331,7 @@ export function TransactionDetail({ transaction, onBack }: TransactionDetailProp
     console.log('Commission split data:', data);
   };
 
-  const handleEditTransaction = (data: Record<string, unknown> & { parties?: unknown[]; conditions?: unknown[] }) => {
+  const handleEditTransaction = (data: TransactionFormData & { parties: Party[]; conditions: Condition[] }) => {
     console.log('Updated transaction data:', data);
     setShowEditTransaction(false);
   };
@@ -573,14 +573,14 @@ export function TransactionDetail({ transaction, onBack }: TransactionDetailProp
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {/*{showEditTransaction && (*/}
-      {/*  <NewTransaction*/}
-      {/*    onClose={() => setShowEditTransaction(false)}*/}
-      {/*    onSave={handleEditTransaction}*/}
-      {/*    editMode={true}*/}
-      {/*    existingData={transaction}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {showEditTransaction && (
+        <NewTransaction
+          onClose={() => setShowEditTransaction(false)}
+          onSave={handleEditTransaction}
+          editMode={true}
+          existingData={transaction}
+        />
+      )}
 
       {/* Navbar */}
       <Navbar onViewTransactions={onBack} onLoginClick={function (): void {

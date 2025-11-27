@@ -4,7 +4,7 @@ import { Button } from "@/components/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/select";
 import { Transaction } from '@/types/transaction';
 
-interface OwnerAssignments {
+export interface OwnerAssignments {
   listingAgent?: string;
   buyerAgent?: string;
   escrowOfficer?: string;

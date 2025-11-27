@@ -3,8 +3,8 @@ import { Button } from "@/components/button";
 import { PrimaryButton } from "@/components/primary-button";
 import { Input } from "@/components/input";
 import { TransactionCard } from './TransactionCard';
-import { NewTransaction } from './NewTransaction';
-import { AssignOwner } from "./AssignOwner";
+import { NewTransaction, TransactionFormData, Party, Condition } from './NewTransaction';
+import { AssignOwner, OwnerAssignments } from "./AssignOwner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/dropdown-menu";
 import { Search, MoreHorizontal, SlidersHorizontal, LayoutGrid, Table, Plus, Bell, Home, ChevronRight, FileText, MoreVertical, Users, Copy, MessageSquare, FileSearch, Trash2, ChevronDown } from 'lucide-react';
@@ -107,7 +107,7 @@ export function TransactionsDashboard({ onViewTransaction, onViewProfile, onView
     return '🏠';
   };
 
-  const handleNewTransactionSave = (data: Record<string, unknown>) => {
+  const handleNewTransactionSave = (data: TransactionFormData & { parties: Party[]; conditions: Condition[] }) => {
     console.log('New transaction data:', data);
     setShowNewTransaction(false);
   };
@@ -117,7 +117,7 @@ export function TransactionsDashboard({ onViewTransaction, onViewProfile, onView
     setShowAssignOwner(true);
   };
 
-  const handleAssignOwnerSave = (assignments: Record<string, unknown>) => {
+  const handleAssignOwnerSave = (assignments: OwnerAssignments) => {
     console.log('Assignments saved:', assignments);
     setShowAssignOwner(false);
     setSelectedTransaction(null);
@@ -141,23 +141,23 @@ export function TransactionsDashboard({ onViewTransaction, onViewProfile, onView
 
   return (
     <div className="min-h-screen bg-white">
-      {/*{showNewTransaction && (*/}
-      {/*  <NewTransaction*/}
-      {/*    onClose={() => setShowNewTransaction(false)}*/}
-      {/*    onSave={handleNewTransactionSave}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {showNewTransaction && (
+        <NewTransaction
+          onClose={() => setShowNewTransaction(false)}
+          onSave={handleNewTransactionSave}
+        />
+      )}
 
-      {/*{showAssignOwner && selectedTransaction && (*/}
-      {/*  <AssignOwner*/}
-      {/*    transaction={selectedTransaction}*/}
-      {/*    onClose={() => {*/}
-      {/*      setShowAssignOwner(false);*/}
-      {/*      setSelectedTransaction(null);*/}
-      {/*    }}*/}
-      {/*    onSave={handleAssignOwnerSave}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {showAssignOwner && selectedTransaction && (
+        <AssignOwner
+          transaction={selectedTransaction}
+          onClose={() => {
+            setShowAssignOwner(false);
+            setSelectedTransaction(null);
+          }}
+          onSave={handleAssignOwnerSave}
+        />
+      )}
       
       {/* Header */}
       <header className="border-b bg-white sticky top-0 z-50">
