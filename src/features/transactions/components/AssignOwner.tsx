@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, UserCircle2, Save } from 'lucide-react';
-import { Button } from "@/components/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/select";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Transaction } from '@/types/transaction';
 
 export interface OwnerAssignments {

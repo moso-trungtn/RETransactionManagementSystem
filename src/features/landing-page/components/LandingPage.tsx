@@ -1,8 +1,8 @@
-import { Button } from "@/components/button";
+import { Button } from "@/components/ui/button";
 import {CheckCircle2, Clock, FileText, Users, TrendingUp, Shield, Zap, Mail, Phone, Star} from 'lucide-react';
-import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
-import { Navbar } from "@/shared/components/Navbar";
-import { Footer } from "@/shared/components/Footer";
+import { ImageWithFallback } from "@/components/custom/image-with-fallback";
+import { Navbar } from "@/components/common/Navbar";
+import { Footer } from "@/components/common/Footer";
 
 interface LandingPageProps {
     onLoginClick: () => void;
@@ -36,9 +36,6 @@ const testimonials = [
 export function LandingPage({ onLoginClick , onRecruitingClick, onLogoClick}: LandingPageProps) {
     return (
         <div className="min-h-screen bg-white">
-            {/* Navigation */}
-            <Navbar onLoginClick={onLoginClick} onLogoClick={onLogoClick} />
-
             {/* Hero Section */}
             <section className="relative bg-gradient-to-b from-gray-50 to-white py-20 lg:py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -281,9 +278,6 @@ export function LandingPage({ onLoginClick , onRecruitingClick, onLogoClick}: La
                     </div>
                 </div>
             </section>
-
-            {/* Footer */}
-            <Footer />
         </div>
     );
 }

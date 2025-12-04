@@ -1,4 +1,4 @@
-import { useWebsiteConfig } from "@/providers/WebsiteConfigContext";
+import { useWebsiteConfig } from "@/contexts/WebsiteConfigContext";
 
 /**
  * Hook to get dynamic theme colors and utilities

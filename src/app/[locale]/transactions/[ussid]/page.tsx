@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useParams } from 'next/navigation';
-import { TransactionDetail } from '@/features/transactions/components/TransactionDetail';
+import { TransactionDetail } from '@/features/transactions/components/transactions/TransactionDetail';
 import { mockTransactions } from '@/features/transactions/data/mockTransactions';
 
 export default function TransactionDetailPage() {

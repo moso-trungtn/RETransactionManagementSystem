@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useParams } from 'next/navigation';
-import { TransactionsDashboard } from '@/features/transactions/components/TransactionsDashboard';
+import { TransactionsDashboard } from '@/features/transactions/components/transactions/TransactionsDashboard';
 import type { Transaction } from '@/types/transaction';
 
 export default function TransactionsPage() {

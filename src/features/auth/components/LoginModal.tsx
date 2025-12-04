@@ -4,10 +4,10 @@ import {
     DialogContent,
     DialogTitle,
     DialogDescription,
-} from "@/components/dialog";
-import {Button} from "@/components/button";
-import {Input} from "@/components/input";
-import {Label} from "@/components/label";
+} from "@/components/ui/dialog";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {Label} from "@/components/ui/label";
 import {
     Mail,
     Lock,

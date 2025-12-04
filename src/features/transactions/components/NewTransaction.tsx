@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { Button } from "@/components/button";
-import { Input } from "@/components/input";
-import { Label } from "@/components/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/select";
-import { Textarea } from "@/components/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/radio-group";
-import { Checkbox } from "@/components/checkbox";
-import { Avatar, AvatarFallback } from "@/components/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { X, Upload, Home, Check, Plus, MoreHorizontal, Trash2, Info } from 'lucide-react';
 import { toast } from 'sonner';
-import { Toaster } from "@/components/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { Transaction } from '@/types/transaction';
 
 export interface TransactionFormData {

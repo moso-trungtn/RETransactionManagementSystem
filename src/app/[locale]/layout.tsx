@@ -1,40 +1,30 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { WebsiteConfigProvider } from '@/providers/WebsiteConfigContext';
-
-// Derive proper Locale type from routing.locales
-type Locale = (typeof routing.locales)[number];
+import { notFound } from 'next/navigation';
+import {Wrapper} from "@/providers/wrapper-provider";
 
 export function generateStaticParams() {
-    return routing.locales.map((locale) => ({ locale }));
+    return routing.locales.map(locale => ({ locale }));
 }
 
-export default async function LocaleLayout({
-                                               children,
-                                               params,
-                                           }: {
+type LayoutProps = {
     children: React.ReactNode;
     params: Promise<{ locale: string }>;
-}) {
+}
+
+export default async function LocaleLayout({children, params}: LayoutProps) {
     const { locale } = await params;
 
-    if (!routing.locales.includes(locale as Locale)) {
-        notFound();
-    }
+    if (!routing.locales.includes(locale as any)) notFound();
 
-    const messages = await getMessages({ locale });
+    const messages = await getMessages();
 
     return (
-        <html lang={locale} suppressHydrationWarning>
-        <body>
-        <NextIntlClientProvider messages={messages}>
-            <WebsiteConfigProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+            <Wrapper>
                 {children}
-            </WebsiteConfigProvider>
+            </Wrapper>
         </NextIntlClientProvider>
-        </body>
-        </html>
     );
 }

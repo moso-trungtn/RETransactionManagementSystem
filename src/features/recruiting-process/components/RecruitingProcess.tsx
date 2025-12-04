@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Button } from "@/components/button";
-import { Input } from "@/components/input";
-import { Label } from "@/components/label";
-import { Checkbox } from "@/components/checkbox";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { ChevronLeft } from "lucide-react";
 import {
     Select,
@@ -10,9 +10,9 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/select";
-import { Navbar } from "@/shared/components/Navbar";
-import { Footer } from "@/shared/components/Footer";
+} from "@/components/ui/select";
+import { Navbar } from "@/components/common/Navbar";
+import { Footer } from "@/components/common/Footer";
 
 interface RecruitingProcessProps {
     onBack?: () => void;
@@ -135,8 +135,6 @@ export function RecruitingProcess({
 
     return (
         <div className="min-h-screen bg-white">
-            {/* Navigation */}
-            <Navbar onLoginClick={onLoginClick} onLogoClick={onLogoClick} />
 
             {/* Header with curved design */}
             <div className="relative bg-[#F36F23] pt-12 pb-40 overflow-hidden z-1">
@@ -759,8 +757,6 @@ export function RecruitingProcess({
                 </div>
             </div>
 
-            {/* Footer */}
-            <Footer />
         </div>
     );
 }

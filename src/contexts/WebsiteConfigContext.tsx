@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import {Footer} from "@/components/common";
 
 export interface WebsiteConfig {
   primaryColor: string;

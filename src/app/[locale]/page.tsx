@@ -39,17 +39,17 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen">
-      <LandingPage
-        onLoginClick={handleLoginClick}
-        onRecruitingClick={handleRecruitingClick}
-        onLogoClick={handleLogoClick}
-      />
-      <LoginModal
-        open={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-        onLogin={handleLogin}
-      />
-    </div>
+      <div className="min-h-screen">
+        <LandingPage
+            onLoginClick={handleLoginClick}
+            onRecruitingClick={handleRecruitingClick}
+            onLogoClick={handleLogoClick}
+        />
+        <LoginModal
+            open={showLoginModal}
+            onClose={() => setShowLoginModal(false)}
+            onLogin={handleLogin}
+        />
+      </div>
   );
 }
